@@ -1,48 +1,52 @@
-<?php
-    // database
-    require_once 'database.php';
+<?php 
+// Set currentPage
+$currentPage = 'home';
 
-    // read
-    try {
+// database
+require_once 'database.php';
+
+// Get list of all users
+try {
+    $stmt = $db->prepare('SELECT * FROM users');
+    $stmt->execute();
+    $aaUsers = $stmt->fetchAll();
+} catch( PDOException $ex ) {
+    exit();
+}
+
+include_once 'header.php'; ?>
+
+<div class="container mt-5">
+    <table class="table table-striped">
+    <thead>
+        <tr>
+            <th scope="col">First name</th>
+            <th scope="col">Last name</th>
+            <th scope="col">Email</th>
+            <th scope="col" class="text-right">Options</th>
+        </tr>
+    </thead>
+    <tbody>
+
+        <?php 
         
-        $sRead = $db->prepare( 'SELECT * FROM test' );
-        $sRead->execute();
-        $aUsers = $sRead->fetchAll();
-        // foreach( $aUsers as $aUser ){
-        //     echo "ID: {$aUser['iId']} - NAME: {$aUser['sName']}";
-        // }
+        foreach ($aaUsers as $aUser) { ?>
 
-    } catch( PDOException $ex ) {
-        echo 'EXCEPTION';
-        exit();
-    }
-?>
+            <tr>
+                <td><?php echo $aUser['sFirstName']; ?></td>
+                <td><?php echo $aUser['sLastName']; ?></td>
+                <td><?php echo $aUser['sEmail']; ?></td>
+                <td class="text-right">
+                    <a class="btn btn-outline-info" href="edit-user-form.php?iUserId=<?php echo $aUser['iId']; ?>">Edit</a>
+                    <a class="btn btn-outline-danger" href="delete-user.php?iUserId=<?php echo $aUser['iId']; ?>">Delete</a>
+                </td>
+            </tr>
 
-<!doctype html>
-<html lang="en">
-  <head>
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+            <?php } ?>
 
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
+    </tbody>
+    </table>
+</div>
 
-  </head>
-  <body>
 
-    <?php
-    
-    foreach ($aUsers as $aUser) {
-        echo 'Name: ' . $aUser['sName'];
-    }
-    
-    ?>
-
-    <!-- Optional JavaScript -->
-    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js" integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm" crossorigin="anonymous"></script>
-  </body>
-</html>
+<?php include_once 'footer.php'; ?>
