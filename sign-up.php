@@ -1,9 +1,9 @@
 <?php require_once '_config.php';
 
+// Checks if a new information has been passed to the page
 if( !empty($_POST['sFirstName']) && !empty($_POST['sLastName']) && !empty($_POST['sEmail']) && !empty($_POST['sPassword']) ){
     
     try{
-        require_once 'database.php';
     
         $sFirstName = $_POST['sFirstName'];
         $sLastName = $_POST['sLastName'];
@@ -12,20 +12,20 @@ if( !empty($_POST['sFirstName']) && !empty($_POST['sLastName']) && !empty($_POST
     
         $query = 'INSERT INTO users VALUES(null, :sFirstName, :sLastName, :sEmail, :sPassword)';
     
-        $stmt = $db->prepare( $query );
+        $stmt = prepareAndBindSQL($query, [':sFirstName' => $sFirstName, ':sLastName' => $sLastName, ':sEmail' => $sEmail, ':sPassword' => $sPassword]);
         
-        $stmt->bindValue(':sFirstName', $sFirstName);
-        $stmt->bindValue(':sLastName', $sLastName);
-        $stmt->bindValue(':sEmail', $sEmail);
-        $stmt->bindValue(':sPassword', $sPassword);
+        // $stmt->bindValue(':sFirstName', $sFirstName);
+        // $stmt->bindValue(':sLastName', $sLastName);
+        // $stmt->bindValue(':sEmail', $sEmail);
+        // $stmt->bindValue(':sPassword', $sPassword);
 
         $stmt->execute();
     
-        $sqlQuery = strtr($stmt->queryString, [':sFirstName' => $sFirstName, ':sLastName' => $sLastName, ':sEmail' => $sEmail, ':sPassword' => $sPassword,] );
+        // $sqlQuery = strtr($stmt->queryString, [':sFirstName' => $sFirstName, ':sLastName' => $sLastName, ':sEmail' => $sEmail, ':sPassword' => $sPassword,] );
     
         // returnHome();
     } catch(PDOException $ex) {
-
+        exit();
     }
 }
 

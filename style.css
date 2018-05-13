@@ -1,0 +1,22 @@
+#logWindow{
+    position: absolute;
+    right: 10px;
+    bottom: 10px;
+    padding: 10px;
+    height: 300px;
+    width: 600px;
+    overflow-y: auto;
+}
+
+#logWindow .list-group-item{
+    text-align: center;
+    padding: 8px;
+    margin-bottom: 20px;
+}
+
+#logWindow .list-group-item:first-of-type{
+    background-color: green;
+    color: white;
+    font-size: 1.4em;
+    font-weight: 600;
+}

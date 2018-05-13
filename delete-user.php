@@ -1,10 +1,6 @@
 <?php 
-
-require_once 'database.php';
-
-function returnHome(){
-    header("Location: index.php");
-}
+// _config
+require_once '_config.php';
 
 if( empty($_GET['iUserId']) ){
     returnHome();

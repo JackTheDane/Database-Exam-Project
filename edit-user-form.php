@@ -1,8 +1,7 @@
-<?php 
+<?php
 
+// _config
 require_once '_config.php';
-
-require_once 'database.php';
 
 if( empty($_GET['iUserId']) ){
     returnHome();

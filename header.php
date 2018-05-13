@@ -1,6 +1,4 @@
 <?php 
-  require_once '_config.php';
-
   // Check for current page, set empty if none
   if(!isset($currentPage)){
     $currentPage = false;
@@ -16,6 +14,7 @@
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
+    <link rel="stylesheet" href="style.css">
   </head>
   <body>
 
@@ -34,10 +33,28 @@
     </div>
   </nav>
 
-  <?php if( !empty($sqlQuery) && $debugMode){ ?>
+  <!-- If debugMode is enabled and an sqlQuery has been passed, then -->
+  <?php if( !empty($sqlQuery) && $debugMode && false){ ?>
   
   <div class="alert alert-success text-center" role="alert">
     <?php echo $sqlQuery; ?>
   </div>
   
   <?php } ?>
+
+  <?php 
+    // If debugMode is enabled, get the website log
+    if($debugMode){
+
+      include_once 'database/log.php';
+
+      echo '<ul id="logWindow" class="card bg-primary">';
+
+        foreach ($aLog as $log ) {
+            echo '<li class="list-group-item">'.$log['argument'].'</li>';
+        }
+
+      echo '</ul>';
+
+    }
+  ?>

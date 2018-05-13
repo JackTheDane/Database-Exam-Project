@@ -2,14 +2,17 @@
 // Set currentPage
 $currentPage = 'home';
 
-// database
-require_once 'database.php';
+// _config
+require_once '_config.php';
 
 // Get list of all users
 try {
-    $stmt = $db->prepare('SELECT * FROM users');
+
+    // $stmt = $db->prepare('SELECT * FROM users');
+    $stmt = prepareAndBindSQL('SELECT * FROM users');
     $stmt->execute();
     $aaUsers = $stmt->fetchAll();
+
 } catch( PDOException $ex ) {
     exit();
 }
