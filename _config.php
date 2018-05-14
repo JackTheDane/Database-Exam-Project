@@ -9,23 +9,27 @@ $debugMode = true;
 $sqlQuery = '';
 
 // Utility functions
-function prepareAndBindSQL($sQuery, $aValuesToBind = null){
-    global $sqlQuery;
+function prepareBindValues($sQuery, $aValuesToBind = null){
     global $db;
 
     $stmt = $db->prepare($sQuery);
     
+    // Checks that an array of values has been passed
     if( !empty($aValuesToBind) && is_array($aValuesToBind) ){
 
+        // If so, bind the values
         foreach ($aValuesToBind as $key => $value) {
             $stmt->bindValue($key, $value);
         }
-        
-        // Make a second variable, with the prepared SQL Query as a string
-        $sqlQuery = strtr($sQuery, $aValuesToBind);
-    } else {
-        $sqlQuery = $sQuery;
     }
+
+    return $stmt;
+}
+
+function prepareBindValuesExecute($sQuery, $aValuesToBind = null){
+    $stmt = prepareBindValues($sQuery, $aValuesToBind);
+
+    $stmt->execute();
 
     return $stmt;
 }

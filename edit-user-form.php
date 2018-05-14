@@ -44,7 +44,7 @@ try {
     exit();
 }
 
-include_once 'header.php'; 
+include_once 'components/_header.php'; 
 
 foreach ($aaUsers as $aUser) {
 ?>
@@ -82,5 +82,5 @@ foreach ($aaUsers as $aUser) {
 
 }
 
-include_once 'footer.php';
+include_once 'components/_footer.php';
 ?>

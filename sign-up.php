@@ -12,18 +12,9 @@ if( !empty($_POST['sFirstName']) && !empty($_POST['sLastName']) && !empty($_POST
     
         $query = 'INSERT INTO users VALUES(null, :sFirstName, :sLastName, :sEmail, :sPassword)';
     
-        $stmt = prepareAndBindSQL($query, [':sFirstName' => $sFirstName, ':sLastName' => $sLastName, ':sEmail' => $sEmail, ':sPassword' => $sPassword]);
-        
-        // $stmt->bindValue(':sFirstName', $sFirstName);
-        // $stmt->bindValue(':sLastName', $sLastName);
-        // $stmt->bindValue(':sEmail', $sEmail);
-        // $stmt->bindValue(':sPassword', $sPassword);
-
-        $stmt->execute();
+        prepareBindValuesExecute($query, [':sFirstName' => $sFirstName, ':sLastName' => $sLastName, ':sEmail' => $sEmail, ':sPassword' => $sPassword]);
     
-        // $sqlQuery = strtr($stmt->queryString, [':sFirstName' => $sFirstName, ':sLastName' => $sLastName, ':sEmail' => $sEmail, ':sPassword' => $sPassword,] );
-    
-        // returnHome();
+        returnHome();
     } catch(PDOException $ex) {
         exit();
     }
@@ -32,7 +23,7 @@ if( !empty($_POST['sFirstName']) && !empty($_POST['sLastName']) && !empty($_POST
 // Set currentPage
 $currentPage = 'sign-up';
 
-include_once 'header.php'; ?>
+include_once 'components/_header.php'; ?>
 
 <div class="container mt-5">
   <form class="row" method="post" action="">
@@ -69,4 +60,4 @@ include_once 'header.php'; ?>
 </div>
 
 
-<?php include_once 'footer.php'; ?>
+<?php include_once 'components/_footer.php'; ?>

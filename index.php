@@ -9,15 +9,14 @@ require_once '_config.php';
 try {
 
     // $stmt = $db->prepare('SELECT * FROM users');
-    $stmt = prepareAndBindSQL('SELECT * FROM users');
-    $stmt->execute();
+    $stmt = prepareBindValuesExecute('SELECT * FROM users');
     $aaUsers = $stmt->fetchAll();
 
 } catch( PDOException $ex ) {
     exit();
 }
 
-include_once 'header.php'; ?>
+include_once 'components/_header.php'; ?>
 
 <div class="container mt-5">
     <table class="table table-striped">
@@ -52,4 +51,4 @@ include_once 'header.php'; ?>
 </div>
 
 
-<?php include_once 'footer.php'; ?>
+<?php include_once 'components/_footer.php'; ?>

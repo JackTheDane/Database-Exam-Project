@@ -1,0 +1,71 @@
+/* Log window */
+#logWindow{
+    position: absolute;
+    right: 10px;
+    bottom: 10px;
+
+    .card{
+        padding: 10px;
+        height: 300px;
+        width: 600px;
+        overflow-y: auto;
+
+        max-height: 300px;
+        transition: all .3s;
+    
+        .list-group-item{
+            text-align: center;
+            padding: 8px;
+            margin-bottom: 20px;
+    
+            &:first-of-type{
+                background-color: green;
+                color: white;
+                font-size: 1.4em;
+                font-weight: 600;
+            }
+        }
+    }
+    
+    // Minification button
+    #buttonMinLog{
+        position: absolute;
+        right: 0;
+        top: 0;
+        transform: translateY(-100%);
+        
+        border-bottom-left-radius: 0;
+        border-bottom-right-radius: 0;
+        width: 60px;
+        font-size: 20px;
+        font-weight: 700; 
+
+        &::before{
+            content: 'X';
+        }
+    }
+
+    &.closed{
+        .card{
+            max-height: 0;
+            padding-top: 0;
+            padding-bottom: 0;
+            border-top: 0px solid;
+            border-bottom: 0px solid;
+
+            transition: 0s;
+        }
+
+        #buttonMinLog{
+            &:not(:hover){
+                opacity: .5;
+            }
+
+            &::before{
+                content: 'log';
+            }
+        }
+
+    }
+}
+
