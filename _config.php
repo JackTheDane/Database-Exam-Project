@@ -4,9 +4,9 @@ function returnHome(){
     header("Location: index.php");
 }
 
-$debugMode = true;
+session_start();
 
-$sqlQuery = '';
+$debugMode = true;
 
 // Utility functions
 function prepareBindValues($sQuery, $aValuesToBind = null){

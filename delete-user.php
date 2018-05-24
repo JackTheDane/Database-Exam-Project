@@ -9,9 +9,7 @@ if( empty($_GET['iUserId']) ){
 $iUserId = $_GET['iUserId'];
 
 try{
-    $stmt = $db->prepare('DELETE FROM users WHERE iId = :iUserId');
-    $stmt->bindValue(':iUserId', $iUserId);
-    $stmt->execute();
+    prepareBindValuesExecute('UPDATE users SET isActive = 0 WHERE iId = :iUserId', [':iUserId' => $iUserId]);
 } catch( PDOException $ex ){
 
 }

@@ -69,3 +69,93 @@
     }
 }
 
+// Sikrer at textareas i forms er 100% width
+.form-group textarea.form-control{
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.custom-file-input{
+    cursor: pointer;
+}
+
+.custom-file-label{
+
+    &::after{
+        background-color: $primary;
+        color: white;
+    }
+}
+
+#productCards{
+    .card{
+        a:not(.btnAddToWishlist){
+            cursor: pointer;
+            color: #555;
+            text-decoration: none;
+            padding: 10px 0;
+        }
+
+        .card-img-top{
+            height: 250px;
+            background-position: center center;
+            background-size: contain;
+            background-repeat: no-repeat;       
+        }
+
+        .card-title{
+            display: flex;
+            justify-content: space-between;
+            font-weight: 300;
+            align-items: center;
+
+            span{
+                font-size: .8em;
+                margin-left: auto;
+                font-weight: 700;
+            }
+        }
+
+    }
+}
+
+img{
+    max-width: 100%;
+}
+
+#productCards{
+
+    .card{
+        margin-left: auto;
+        margin-right: auto;
+        position: relative;      
+    }
+}
+
+#orderHistory{
+    img{
+        max-width: 50px;
+        max-height: 50px;        
+    }
+}
+
+.btnAddToWishlist{
+    border-radius: 5000px;
+    height: 50px;
+    width: 50px;
+    font-size: 20px;
+    padding: 0;
+    
+    position: absolute;
+    
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    right: -20px;
+    top: -15px;    
+    z-index: 100;
+    
+    &.btn-outline-info:not(:hover){
+        background-color: white;
+    }
+}

@@ -48,3 +48,77 @@
     opacity: .5; }
   #logWindow.closed #buttonMinLog::before {
     content: 'log'; }
+
+.form-group textarea.form-control {
+  width: 100%;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box; }
+
+.custom-file-input {
+  cursor: pointer; }
+
+.custom-file-label::after {
+  background-color: #007bff;
+  color: white; }
+
+#productCards .card a:not(.btnAddToWishlist) {
+  cursor: pointer;
+  color: #555;
+  text-decoration: none;
+  padding: 10px 0; }
+
+#productCards .card .card-img-top {
+  height: 250px;
+  background-position: center center;
+  background-size: contain;
+  background-repeat: no-repeat; }
+
+#productCards .card .card-title {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  font-weight: 300;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center; }
+  #productCards .card .card-title span {
+    font-size: .8em;
+    margin-left: auto;
+    font-weight: 700; }
+
+img {
+  max-width: 100%; }
+
+#productCards .card {
+  margin-left: auto;
+  margin-right: auto;
+  position: relative; }
+
+#orderHistory img {
+  max-width: 50px;
+  max-height: 50px; }
+
+.btnAddToWishlist {
+  border-radius: 5000px;
+  height: 50px;
+  width: 50px;
+  font-size: 20px;
+  padding: 0;
+  position: absolute;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  right: -20px;
+  top: -15px;
+  z-index: 100; }
+  .btnAddToWishlist.btn-outline-info:not(:hover) {
+    background-color: white; }
