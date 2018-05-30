@@ -1,4 +1,4 @@
-localStorage.logWindowOpen = localStorage.logWindowOpen !== null ? localStorage.logWindowOpen : 0;
+localStorage.logWindowOpen = localStorage.logWindowOpen !== null && localStorage.logWindowOpen !== 'undefined' ? localStorage.logWindowOpen : 0;
 
 let logWindow = document.getElementById('logWindow');
 const buttonMinLog = document.getElementById('buttonMinLog');

@@ -130,6 +130,27 @@ img{
         margin-right: auto;
         position: relative;      
     }
+
+    .outOfStock{
+        pointer-events: none;
+        position: relative;
+
+        &::after{
+            content: 'Out of stock';
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 100%;
+            width: 100%;
+            background-color: rgba(255,255,255,.8);
+            color: black;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+    }
 }
 
 #orderHistory{
@@ -157,5 +178,23 @@ img{
     
     &.btn-outline-info:not(:hover){
         background-color: white;
+    }
+}
+
+a.disabled{
+    color: rgba(0,0,0,.8);
+    pointer-events: none;
+    text-decoration: underline;
+}
+
+#productCategorySelection{
+
+    .card-body{
+        list-style: none;
+
+        label{
+            cursor: pointer;
+            user-select: none;
+        }
     }
 }

@@ -16,15 +16,7 @@ $iProductId = $_GET['iProductId'];
 try {
 
     /******* MongoDB *******/
-
-    // Point to Composer's autoloader
-    require_once 'vendor/autoload.php';
-
-    // Connect
-    $m = new MongoDB\Client("mongodb://localhost:27017");
-
-    // Selecting the database
-    $mdb = $m->dbexam;
+    require_once 'database/mongo-db.php';
 
     // Selecting the collection we want to manipulate
     $cProducts = $mdb->products;
@@ -52,7 +44,7 @@ try {
 if( !empty( $_SESSION['iUserId'] ) ){
     try{
         // Get wishlist
-        $query = 'SELECT iProductId FROM user_wishlist WHERE iUserId = :iUserId AND isActive = 1';
+        $query = 'SELECT iProductId FROM user_wishlist WHERE iUserId = :iUserId';
     
         $stmt = prepareBindValuesExecute($query, [':iUserId' => $_SESSION['iUserId']]);
     
@@ -93,9 +85,16 @@ include_once 'components/_header.php'; ?>
                 <?php echo $sDescription ?>
             </p>
             <div class="d-flex align-items-end mb-3">
+                <?php if( $aProduct['iNumberInStore'] <= 0 ){ ?>
+                <a href="" class="btn btn-success btn-lg disabled">
+                    Out of stock
+                </a>
+                <?php } else { ?>
                 <a href="buy-product.php?iProductId=<?php echo $aProduct['iId'] ?>" class="btn btn-success btn-lg">
                     Buy item
                 </a>
+                <?php } ?>
+
                 <?php if( !empty( $_SESSION['iUserId'] ) ){
                 if( in_array( $aProduct['iId'], $aaProductsInWishlist ) ){ ?>
                     <a href="delete-product-from-wishlist.php?iProductId=<?php echo $aProduct['iId']; ?>&sReturnPage=view-product" class="btn ml-3 btn-info">

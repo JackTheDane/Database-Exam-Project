@@ -3,11 +3,22 @@
 // _config
 require_once '_config.php';
 
+// Redirects user to New User screen, if not logged in
+if( empty($_SESSION['iUserId']) ){
+    header('Location: sign-up.php?redir=view-product.php?iProductId=24');
+}
+
 if( empty($_GET['iProductId']) ){
     returnHome();
 }
 
 $iProductId = $_GET['iProductId'];
+
+// MongoDB
+require_once 'database/mongo-db.php';
+
+// Selecting the collection we want to manipulate
+$cProducts = $mdb->products;
 
 try{
     $db->beginTransaction();
@@ -28,8 +39,17 @@ try{
 
     $db->commit();
 
+    // If all queries were successful, decrease number in MongoDB by one
+    $cProducts->updateOne(
+        ['iId' => $iProductId],
+        ['$inc' => [
+            'iNumberInStore' => -1
+        ]]
+    );
+
 } catch( PDOException $ex ){
     echo $ex;
+    exit();
 }
 
 returnHome();

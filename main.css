@@ -97,6 +97,30 @@ img {
   margin-right: auto;
   position: relative; }
 
+#productCards .outOfStock {
+  pointer-events: none;
+  position: relative; }
+  #productCards .outOfStock::after {
+    content: 'Out of stock';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 100%;
+    width: 100%;
+    background-color: rgba(255, 255, 255, 0.8);
+    color: black;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center; }
+
 #orderHistory img {
   max-width: 50px;
   max-height: 50px; }
@@ -122,3 +146,17 @@ img {
   z-index: 100; }
   .btnAddToWishlist.btn-outline-info:not(:hover) {
     background-color: white; }
+
+a.disabled {
+  color: rgba(0, 0, 0, 0.8);
+  pointer-events: none;
+  text-decoration: underline; }
+
+#productCategorySelection .card-body {
+  list-style: none; }
+  #productCategorySelection .card-body label {
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none; }

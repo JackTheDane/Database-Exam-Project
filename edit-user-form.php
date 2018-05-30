@@ -55,7 +55,9 @@ $currentPage = 'edit-user';
 
 try {
     // Get everything from the user and joined city
-    $stmt = prepareBindValuesExecute('SELECT * FROM users JOIN cities ON users.iCityId = cities.iId WHERE users.iId = :iUserId;', [':iUserId' => $iUserId]);
+    $stmt = prepareBindValuesExecute('SELECT users.*, cities.* FROM users 
+        INNER JOIN cities ON users.iCityId = cities.iId 
+        WHERE users.iId = :iUserId;', [':iUserId' => $iUserId]);
 
     $aaUsers = $stmt->fetchAll();
 } catch( PDOException $ex ) {

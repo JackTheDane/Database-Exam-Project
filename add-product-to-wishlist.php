@@ -9,7 +9,7 @@ if( empty($_GET['iProductId']) ){
 $iProductId = $_GET['iProductId'];
 
 try{
-    $query = 'INSERT INTO user_wishlist (iUserId, iProductId, isActive) VALUES(:iUserId, :iProductId, 1)';
+    $query = 'INSERT INTO user_wishlist (iUserId, iProductId) VALUES(:iUserId, :iProductId)';
 
     prepareBindValuesExecute($query, [':iProductId' => $iProductId, ':iUserId' => $_SESSION['iUserId']]);
 } catch( PDOException $ex ){

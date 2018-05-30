@@ -9,7 +9,8 @@ if( empty($_GET['iProductId']) ){
 $iProductId = $_GET['iProductId'];
 
 try{
-    prepareBindValuesExecute('UPDATE user_wishlist SET isActive = 0 WHERE iProductId = :iProductId AND iUserId = :iUserId', [':iProductId' => $iProductId, ':iUserId' => $_SESSION['iUserId']]);
+    $query = 'DELETE FROM user_wishlist WHERE iProductId = :iProductId AND iUserId = :iUserId';
+    prepareBindValuesExecute($query, [':iProductId' => $iProductId, ':iUserId' => $_SESSION['iUserId']]);
 } catch( PDOException $ex ){
     exit();
 }

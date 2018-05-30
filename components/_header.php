@@ -34,7 +34,7 @@
 
   <nav class="navbar navbar-expand-lg navbar-light bg-light justify-content-between">
     <div class="container">
-      <a class="navbar-brand disabled" href="index.php">Webshop</a>
+      <a class="navbar-brand" href="index.php">Webshop</a>
 
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav ml-auto">
@@ -93,6 +93,7 @@
 
   <?php 
     // If debugMode is enabled, get the website log
+    /* CURRENTLY DISABLED - Requires a not exported stored procedure to work
     if($debugMode){
 
       include_once 'database/log.php'; ?>
@@ -112,10 +113,12 @@
         </ul>
       </div>
 
-    <?php }?>
+    <?php } */?>
 
     <script>
-      if( localStorage.logWindowOpen !== null && !JSON.parse(localStorage.logWindowOpen) ){
-        logWindow.classList.add('closed');
-      }
+      // if( localStorage.logWindowOpen !== null && localStorage.logWindowOpen !== 'undefined' && !JSON.parse(localStorage.logWindowOpen) ){
+      //   logWindow.classList.add('closed');
+      // }
+
+      // console.log(localStorage.logWindowOpen);
     </script>

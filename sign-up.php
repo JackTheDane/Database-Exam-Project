@@ -16,21 +16,32 @@ if( !empty($_POST['sFirstName']) && !empty($_POST['sLastName']) && !empty($_POST
         $sCity = $_POST['sCity'];
         $iZipCode = $_POST['iZipCode'];
     
-        $db->beginTransaction();
-    
+        $db->beginTransaction();    
         
         $stmt = prepareBindValues("INSERT INTO cities VALUES(null, :iZipCode, :sCity) ON DUPLICATE KEY UPDATE iId=iId", [':iZipCode' => $iZipCode, ':sCity' => $sCity]);
 
         if($stmt->execute()){
             
             // Insert user, with the id of the city given (Retrived in subquery)
-            $query = 'INSERT INTO users VALUES(null, :sFirstName, :sLastName, :sEmail, :sPassword, :sAddress, ( SELECT iId FROM cities WHERE iZipCode = :iZipCode OR sName = :sCity ), 0, 1)';
+            $query = 'INSERT INTO users
+                      (sFirstName, sLastName, sEmail, sPassword, sAddress, iCityId)
+                      VALUES(:sFirstName, :sLastName, :sEmail, :sPassword, :sAddress, 
+                        ( SELECT iId FROM cities WHERE iZipCode = :iZipCode OR sName = :sCity ))';
             
             $stmt = prepareBindValues($query, [':sFirstName' => $sFirstName, ':sLastName' => $sLastName, ':sEmail' => $sEmail, ':sPassword' => $sPassword, ':sAddress' => $sAddress, ':iZipCode' => $iZipCode, ':sCity' => $sCity]);
             
             if($stmt->execute()){
+                // Set iUserId of the user
+                $_SESSION['iUserId'] = $db->lastInsertId();
+
                 $db->commit();
-                returnHome();
+
+                if( !empty($_GET['redir']) ){
+                    echo $_GET['redir'];
+                    header('Location: '.$_GET['redir']);
+                } else {
+                    returnHome();
+                }
             }else{
                 $db->rollBack();
             }

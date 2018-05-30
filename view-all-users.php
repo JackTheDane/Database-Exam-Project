@@ -7,8 +7,6 @@ require_once '_config.php';
 
 // Get list of all users
 try {
-
-    // $stmt = $db->prepare('SELECT * FROM users');
     $stmt = prepareBindValuesExecute('SELECT * FROM users WHERE isActive = 1');
     $aaUsers = $stmt->fetchAll();
 

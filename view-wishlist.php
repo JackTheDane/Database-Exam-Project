@@ -7,7 +7,7 @@ require_once '_config.php';
 
 try{
     // Get wishlist
-    $query = 'SELECT iProductId FROM user_wishlist WHERE iUserId = :iUserId AND isActive = 1';
+    $query = 'SELECT iProductId FROM user_wishlist WHERE iUserId = :iUserId';
 
     $stmt = prepareBindValues($query, [':iUserId' => $_SESSION['iUserId']]);
 
