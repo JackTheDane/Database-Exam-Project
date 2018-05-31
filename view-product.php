@@ -90,19 +90,19 @@ include_once 'components/_header.php'; ?>
                     Out of stock
                 </a>
                 <?php } else { ?>
-                <a href="buy-product.php?iProductId=<?php echo $aProduct['iId'] ?>" class="btn btn-success btn-lg">
+                <a href="confirm-order.php?iProductId=<?php echo $aProduct['iId'] ?>" class="btn btn-success btn-lg">
                     Buy item
                 </a>
                 <?php } ?>
 
                 <?php if( !empty( $_SESSION['iUserId'] ) ){
                 if( in_array( $aProduct['iId'], $aaProductsInWishlist ) ){ ?>
-                    <a href="delete-product-from-wishlist.php?iProductId=<?php echo $aProduct['iId']; ?>&sReturnPage=view-product" class="btn ml-3 btn-info">
+                    <a href="delete-product-from-wishlist.php?iProductId=<?php echo $aProduct['iId']; ?>&redir=view-product.php?iProductId=<?php echo $aProduct['iId']; ?>" class="btn ml-3 btn-info">
                         <i class="fas fa-heart"></i>
                         Remove from wishlist
                     </a>
                 <?php } else { ?>
-                    <a href="add-product-to-wishlist.php?iProductId=<?php echo $aProduct['iId']; ?>&sReturnPage=view-product" class="btn ml-3 btn-outline-info">
+                    <a href="add-product-to-wishlist.php?iProductId=<?php echo $aProduct['iId']; ?>&redir=view-product.php?iProductId=<?php echo $aProduct['iId']; ?>" class="btn ml-3 btn-outline-info">
                         <i class="far fa-heart"></i>
                         Add to wishlist
                     </a>

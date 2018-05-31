@@ -19,7 +19,12 @@ try {
     $dbLog = new PDO( $sConnection, $sUserName, $sPassword, $aOptions );
 
     // Get general log. Selects the first 20 argument and event_time of the website user
-    $stmtLog = $dbLog->prepare("call get_general_log;");
+    // Have to call SET GLOBAL log_output = 'TABLE'; SET GLOBAL general_log = 'ON'; first and check general_log columns
+
+    $query = "SELECT argument, event_time FROM general_log WHERE command_type = 'Query' AND user_host LIKE 'website%' AND argument NOT IN ('START TRANSACTION', 'COMMIT') ORDER BY event_time DESC LIMIT 20;";
+
+
+    $stmtLog = $dbLog->prepare($query);
     $stmtLog->execute();
 
     $aLog = $stmtLog->fetchAll();

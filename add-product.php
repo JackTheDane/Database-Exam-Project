@@ -138,7 +138,7 @@ include_once 'components/_header.php'; ?>
                         <span class="input-group-text">DKK</span>
                     </div>
 
-                    <input type="number" class="form-control" name="rPrice" id="rPrice" placeholder="Product price">
+                    <input type="number" step="0.05" class="form-control" name="rPrice" id="rPrice" placeholder="Product price">
                 </div>
             </div>
 

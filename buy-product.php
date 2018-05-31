@@ -3,13 +3,14 @@
 // _config
 require_once '_config.php';
 
-// Redirects user to New User screen, if not logged in
-if( empty($_SESSION['iUserId']) ){
-    header('Location: sign-up.php?redir=view-product.php?iProductId=24');
-}
 
 if( empty($_GET['iProductId']) ){
     returnHome();
+}
+
+// Redirects user to New User screen, if not logged in
+if( empty($_SESSION['iUserId']) ){
+    header('Location: sign-up.php?redir=view-product.php?iProductId='.$_GET['iProductId']);
 }
 
 $iProductId = $_GET['iProductId'];
@@ -32,6 +33,14 @@ try{
 
     $query = 'UPDATE products SET iNumberInStore = iNumberInStore-1 WHERE iId = :iProductId AND iNumberInStore > 0';
     $stmt = prepareBindValues($query, [':iProductId' => $iProductId]);
+
+    if( !$stmt->execute() ){
+        $db->rollBack();
+    }
+
+    // Remove from wishlist
+    $query = 'DELETE FROM user_wishlist WHERE iUserId = :iUserId AND iProductId = :iProductId';
+    $stmt = prepareBindValues($query, [':iProductId' => $iProductId, ':iUserId' => $_SESSION['iUserId']]);
 
     if( !$stmt->execute() ){
         $db->rollBack();

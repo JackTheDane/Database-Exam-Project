@@ -15,15 +15,9 @@ try{
     exit();
 }
 
-if( isset(  $_GET['sReturnPage']) ){
-
-    if( $_GET['sReturnPage'] === 'view-product' ){
-        header("Location: view-product.php?iProductId=$iProductId");
-    } else if( $_GET['sReturnPage'] === 'view-wishlist' ){ 
-        header("Location: view-wishlist.php");
-    } else {
-        returnHome();
-    }
+if( !empty( $_GET['redir']) ){
+    
+    header("Location: ".$_GET['redir']);
 
 } else {
     returnHome();

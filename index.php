@@ -23,11 +23,13 @@ try {
 
     // Check for search parameters
     if( !empty( $_GET['orderBy'] ) ){
+
         if( $_GET['orderBy'] == 'highestPrice' ){
             $aSortBy = [
                 'rPrice' => -1
             ];
-        } else {
+
+        } else if ( $_GET['orderBy'] == 'lowestPrice') {
             $aSortBy = [
                 'rPrice' => 1
             ];
@@ -129,8 +131,13 @@ include_once 'components/_header.php'; ?>
                 <span>
                     Sort by:
                 </span>
-                <a href="?<?php $aUrlQuery['orderBy'] = 'lowestPrice'; echo http_build_query($aUrlQuery); ?>" class="mx-1<?php if( !empty( $_GET['orderBy'] )){ if( $_GET['orderBy'] == 'lowestPrice' ){echo ' disabled';} }  ?>">Lowest Price</a>
-                <a href="?<?php $aUrlQuery['orderBy'] = 'highestPrice'; echo http_build_query($aUrlQuery); ?>" class="<?php if( !empty( $_GET['orderBy'] )){ if( $_GET['orderBy'] == 'highestPrice' ){echo 'disabled';} }  ?>">Highest Price</a>
+                <?php
+                    // Temp query, as to not interfere with primray HTTP Query
+                    $aTempUrlQuery = $aUrlQuery;
+                ?>
+
+                <a href="?<?php $aTempUrlQuery['orderBy'] = 'lowestPrice'; echo http_build_query($aTempUrlQuery); ?>" class="mx-1<?php if( !empty( $_GET['orderBy'] )){ if( $_GET['orderBy'] == 'lowestPrice' ){echo ' disabled';} }  ?>">Lowest Price</a>
+                <a href="?<?php $aTempUrlQuery['orderBy'] = 'highestPrice'; echo http_build_query($aTempUrlQuery); ?>" class="<?php if( !empty( $_GET['orderBy'] )){ if( $_GET['orderBy'] == 'highestPrice' ){echo 'disabled';} }  ?>">Highest Price</a>
             </div>
         </div>
     </div>
@@ -141,11 +148,12 @@ include_once 'components/_header.php'; ?>
                 <div class="card-header">Categories</div>
                 <ul class="card-body mb-0">
                 <?php
-                // Output all categories
-                foreach ($ajProductCategories as $jCategory) { ?>
+                foreach ($ajProductCategories as $jCategory) { 
+                    $aTempUrlQuery = $aUrlQuery;    
+                ?>
                     
                     <li>
-                        <a href="?<?php $aUrlQuery['productCategoryId'] = $jCategory['iId']; echo http_build_query($aUrlQuery); ?>" class="<?php if( !empty( $_GET['productCategoryId'] )){ if( $_GET['productCategoryId'] == $jCategory['iId'] ){echo 'disabled';} }  ?>">
+                        <a href="?<?php $aTempUrlQuery['productCategoryId'] = $jCategory['iId']; echo urlencode(http_build_query($aTempUrlQuery)); ?>" class="<?php if( !empty( $_GET['productCategoryId'] )){ if( $_GET['productCategoryId'] == $jCategory['iId'] ){echo 'disabled';} }  ?>">
                             <?php echo $jCategory['sName']; ?>
                         </a>
                     </li>
@@ -167,11 +175,11 @@ include_once 'components/_header.php'; ?>
         
                             <?php if( !empty( $_SESSION['iUserId'] ) ){
                              if( in_array( $aProduct['iId'], $aaProductsInWishlist ) ){ ?>
-                                <a href="delete-product-from-wishlist.php?iProductId=<?php echo $aProduct['iId']; ?>&sReturnPage=index" class="btn btn-info btnAddToWishlist">
+                                <a href="delete-product-from-wishlist.php?iProductId=<?php echo $aProduct['iId']; ?>&redir=index.php?<?php echo http_build_query($aUrlQuery); ?>" class="btn btn-info btnAddToWishlist">
                                     <i class="fas fa-heart"></i>
                                 </a>
                             <?php } else { ?>
-                                <a href="add-product-to-wishlist.php?iProductId=<?php echo $aProduct['iId']; ?>&sReturnPage=index" class="btn btn-outline-info btnAddToWishlist">
+                                <a href="add-product-to-wishlist.php?iProductId=<?php echo $aProduct['iId']; ?>&redir=index.php?<?php echo http_build_query($aUrlQuery); ?>" class="btn btn-outline-info btnAddToWishlist">
                                     <i class="far fa-heart"></i>
                                 </a>
                             <?php } 

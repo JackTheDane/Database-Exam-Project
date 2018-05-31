@@ -1,14 +1,27 @@
+body{
+    padding-bottom: 300px;
+    opacity: 0;
+
+    transition: opacity .001s ease;
+}
+
 /* Log window */
 #logWindow{
-    position: absolute;
+    position: fixed;
     right: 10px;
     bottom: 10px;
+    width: 100%;
+    padding-left: 20px;
+    z-index: 10000;
 
     .card{
         padding: 10px;
-        height: 300px;
-        width: 600px;
+        height: 260px;
+        width: 100%;
         overflow-y: auto;
+
+        background-color: rgb(37, 37, 37);
+        color: white;
 
         max-height: 300px;
         transition: all .3s;
@@ -17,12 +30,25 @@
             text-align: center;
             padding: 8px;
             margin-bottom: 20px;
+
+            background-color: rgb(109, 109, 109);
+
+            &:not(.isActive){
+                cursor: pointer;
+            }
+
+            p{
+                margin: 5px 0;
+            }
     
-            &:first-of-type{
-                background-color: green;
-                color: white;
+            &.isActive{
+                background-color: $success !important;
                 font-size: 1.4em;
                 font-weight: 600;
+            }
+
+            &:hover{
+                background-color: slategray;
             }
         }
     }

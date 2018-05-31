@@ -93,32 +93,37 @@
 
   <?php 
     // If debugMode is enabled, get the website log
-    /* CURRENTLY DISABLED - Requires a not exported stored procedure to work
     if($debugMode){
 
       include_once 'database/log.php'; ?>
 
       <div id="logWindow">
-        <button id="buttonMinLog" type="button" class="btn btn-info"></button>
-        <ul class="card bg-primary">
+        <button id="buttonMinLog" type="button" class="btn btn-dark"></button>
+        <ul class="card">
   
         <?php
-          foreach ($aLog as $log ) {
-            if ($log['argument'] != 'START TRANSACTION' && $log['argument'] != 'COMMIT') {
-              echo '<li class="list-group-item">'.$log['argument'].'</li>';
+          for ($i=0; $i < count($aLog); $i++) {
+            if( $i == 0 ){
+              $sClass = ' isActive';
+            } else {
+              $sClass = '';
             }
+
+            $log = $aLog[$i];
+
+            echo '<li class="list-group-item'. $sClass .'">'.$log['argument'];
+            echo '<p>'. $log['event_time'] .'</p>';
+            echo '</li>';
           }
         ?>
   
         </ul>
       </div>
 
-    <?php } */?>
+    <?php }?>
 
     <script>
-      // if( localStorage.logWindowOpen !== null && localStorage.logWindowOpen !== 'undefined' && !JSON.parse(localStorage.logWindowOpen) ){
-      //   logWindow.classList.add('closed');
-      // }
-
-      // console.log(localStorage.logWindowOpen);
+      if( localStorage.logWindowOpen !== null && localStorage.logWindowOpen !== 'undefined' && !JSON.parse(localStorage.logWindowOpen) ){
+        logWindow.classList.add('closed');
+      }
     </script>

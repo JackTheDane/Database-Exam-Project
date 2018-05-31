@@ -1,13 +1,25 @@
+body {
+  padding-bottom: 300px;
+  opacity: 0;
+  -webkit-transition: opacity .001s ease;
+  -o-transition: opacity .001s ease;
+  transition: opacity .001s ease; }
+
 /* Log window */
 #logWindow {
-  position: absolute;
+  position: fixed;
   right: 10px;
-  bottom: 10px; }
+  bottom: 10px;
+  width: 100%;
+  padding-left: 20px;
+  z-index: 10000; }
   #logWindow .card {
     padding: 10px;
-    height: 300px;
-    width: 600px;
+    height: 260px;
+    width: 100%;
     overflow-y: auto;
+    background-color: #252525;
+    color: white;
     max-height: 300px;
     -webkit-transition: all .3s;
     -o-transition: all .3s;
@@ -15,12 +27,18 @@
     #logWindow .card .list-group-item {
       text-align: center;
       padding: 8px;
-      margin-bottom: 20px; }
-      #logWindow .card .list-group-item:first-of-type {
-        background-color: green;
-        color: white;
+      margin-bottom: 20px;
+      background-color: #6d6d6d; }
+      #logWindow .card .list-group-item:not(.isActive) {
+        cursor: pointer; }
+      #logWindow .card .list-group-item p {
+        margin: 5px 0; }
+      #logWindow .card .list-group-item.isActive {
+        background-color: #28a745 !important;
         font-size: 1.4em;
         font-weight: 600; }
+      #logWindow .card .list-group-item:hover {
+        background-color: slategray; }
   #logWindow #buttonMinLog {
     position: absolute;
     right: 0;
