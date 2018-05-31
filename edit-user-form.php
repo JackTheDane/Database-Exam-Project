@@ -104,6 +104,17 @@ foreach ($aaUsers as $aUser) {?>
     </div>
     
   </form>
+<div class="row mt-5">
+    <div class="col-lg-6 offset-lg-3">
+        <h5>
+            Delete user
+        </h5>
+        <a href="delete-user.php?iUserId=<?php echo $_SESSION['iUserId'] ?>" class="btn btn-danger btn-block">
+          Delete my user
+        </a>
+    </div>
+</div>
+
 </div>
 
 <?php

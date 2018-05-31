@@ -153,7 +153,7 @@ include_once 'components/_header.php'; ?>
                 ?>
                     
                     <li>
-                        <a href="?<?php $aTempUrlQuery['productCategoryId'] = $jCategory['iId']; echo urlencode(http_build_query($aTempUrlQuery)); ?>" class="<?php if( !empty( $_GET['productCategoryId'] )){ if( $_GET['productCategoryId'] == $jCategory['iId'] ){echo 'disabled';} }  ?>">
+                        <a href="?<?php $aTempUrlQuery['productCategoryId'] = $jCategory['iId']; echo http_build_query($aTempUrlQuery); ?>" class="<?php if( !empty( $_GET['productCategoryId'] )){ if( $_GET['productCategoryId'] == $jCategory['iId'] ){echo 'disabled';} }  ?>">
                             <?php echo $jCategory['sName']; ?>
                         </a>
                     </li>

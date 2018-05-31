@@ -14,4 +14,8 @@ try{
 
 }
 
+if( $iUserId == $_SESSION['iUserId'] ){
+    session_destroy();
+}
+
 returnHome();
